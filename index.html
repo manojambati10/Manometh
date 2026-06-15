@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manometh</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Space Grotesk',sans-serif;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+h1{
+font-size:5rem;
+color:#39FF14;
+text-shadow:0 0 20px #39FF14;
+animation:glow 2s infinite alternate;
+}
+
+.subtitle{
+margin-top:15px;
+font-size:1.2rem;
+opacity:.8;
+}
+
+.btn{
+margin-top:30px;
+padding:15px 35px;
+border:2px solid #39FF14;
+background:transparent;
+color:#39FF14;
+border-radius:40px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+background:#39FF14;
+color:black;
+box-shadow:0 0 30px #39FF14;
+}
+
+section{
+padding:100px 10%;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:20px;
+margin-top:20px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px #39FF14;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #39FF14;
+}
+to{
+text-shadow:0 0 40px #39FF14;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<h1>MANOMETH</h1>
+<p class="subtitle">
+Medical Student • Trader • Builder
+</p>
+<button class="btn">Explore</button>
+</div>
+
+<section>
+<h2>About Me</h2>
+<div class="card">
+<p>
+I blend medicine, finance and technology.
+Currently building skills in healthcare,
+trading and digital projects.
+</p>
+</div>
+</section>
+
+<section>
+<h2>Projects</h2>
+<div class="card">Project One</div>
+<div class="card">Project Two</div>
+<div class="card">Project Three</div>
+</section>
+
+<section>
+<h2>Contact</h2>
+<div class="card">
+email@manometh.com
+</div>
+</section>
+
+</body>
+</html>
