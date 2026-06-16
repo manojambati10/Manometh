@@ -875,6 +875,79 @@
       </div>
     </div>
   </section>
+<!-- Worlds -->
+<section class="worlds-section" id="worlds">
+  <p class="section-eyebrow fade-in">My worlds</p>
+  <h2 class="section-title fade-in">Beyond the <em style="font-style:italic;font-family:'Playfair Display',serif;color:var(--accent)">screen.</em></h2>
+  <div class="worlds-grid">
+
+    <div class="world-btn medicine fade-in">
+      <div class="world-glow"></div>
+      <div class="world-particles"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="world-icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2 C12 2,16 2,16 6 C16 10,8 10,8 14 C8 18,13 18,13 18"/>
+          <path d="M12 2 C12 1,10 0,9 0"/>
+          <path d="M12 2 C12 1,14 0,15 0"/>
+          <circle cx="13" cy="20" r="2" fill="rgba(200,240,58,0.3)" stroke-width="1.5"/>
+          <path d="M8.5 14 L9.5 14 L10 12 L10.5 16 L11 14 L12 14" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="world-content">
+        <p class="world-label">Domain 01</p>
+        <h3 class="world-title">Medicine</h3>
+        <p class="world-desc">Where it all started. Diagnosing, treating, and understanding the human body — the original complex system I learned to debug.</p>
+      </div>
+      <div class="world-arrow">↗</div>
+    </div>
+
+    <div class="world-btn trading fade-in">
+      <div class="world-glow"></div>
+      <div class="world-particles"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="world-icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="12" x2="4" y2="6"/>
+          <rect x="2.5" y="8" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+          <line x1="9" y1="15" x2="9" y2="5"/>
+          <rect x="7.5" y="9" width="3" height="5" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+          <line x1="14" y1="13" x2="14" y2="7"/>
+          <rect x="12.5" y="8" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+          <line x1="19" y1="10" x2="19" y2="4"/>
+          <rect x="17.5" y="5" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+          <line x1="2" y1="19" x2="22" y2="19" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="world-content">
+        <p class="world-label">Domain 02</p>
+        <h3 class="world-title">Trading</h3>
+        <p class="world-desc">Charts, patterns, and calculated risk. I apply the same clinical precision to markets — reading signals, managing exposure, staying disciplined.</p>
+      </div>
+      <div class="world-arrow">↗</div>
+    </div>
+
+    <div class="world-btn esports fade-in">
+      <div class="world-glow"></div>
+      <div class="world-particles"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="world-icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="11" rx="5"/>
+          <line x1="8" y1="10" x2="8" y2="14"/>
+          <line x1="6" y1="12" x2="10" y2="12"/>
+          <circle cx="16" cy="10.5" r="1" fill="var(--accent)" stroke="none"/>
+          <circle cx="14" cy="13" r="1" fill="var(--accent)" stroke="none"/>
+          <circle cx="18" cy="13" r="1" fill="var(--accent)" stroke="none"/>
+        </svg>
+      </div>
+      <div class="world-content">
+        <p class="world-label">Domain 03</p>
+        <h3 class="world-title">Esports</h3>
+        <p class="world-desc">A player, a spectator, a fan. The strategy, teamwork, and mechanical skill in competitive gaming is a sport I take seriously.</p>
+      </div>
+      <div class="world-arrow">↗</div>
+    </div>
+
+  </div>
+</section>
 
 <!-- Contact -->
   <section class="section" id="contact">
@@ -1030,6 +1103,15 @@
         nav.style.background = 'rgba(10,10,10,0.7)';
       }
     });
+    // Worlds ripple effect
+document.querySelectorAll('.world-btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty('--rx', (e.clientX - rect.left) + 'px');
+    btn.style.setProperty('--ry', (e.clientY - rect.top) + 'px');
+  });
+});
+
   </script>
 </body>
 </html>
