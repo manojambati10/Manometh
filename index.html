@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MANOMETH — Doctor, Developer & Designer</title>
+  <title>MANOMETH — Dr. ManojAmbati</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -496,6 +496,174 @@
       75%  { text-shadow: none; }
       100% { text-shadow: none; }
     }
+/* ── WORLDS SECTION ── */
+.worlds-section {
+  padding: 120px 60px;
+  border-top: 1px solid var(--border);
+}
+.worlds-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.world-btn {
+  position: relative;
+  border-radius: 28px;
+  padding: 52px 36px 44px;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 320px;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s;
+  background: linear-gradient(160deg, rgba(220,255,80,0.18) 0%, rgba(160,208,32,0.10) 40%, rgba(10,10,10,0.85) 100%);
+  box-shadow: 0 0 0 1px rgba(200,240,58,0.25), 0 8px 40px rgba(200,240,58,0.08), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+.world-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+  border-radius: 28px 28px 60% 60% / 28px 28px 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+.world-btn::after {
+  content: '';
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,58,0.35), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.5s;
+  opacity: 0;
+  left: var(--rx, 50%);
+  top: var(--ry, 50%);
+}
+.world-btn:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 0 1px rgba(200,240,58,0.6), 0 20px 60px rgba(200,240,58,0.2), 0 0 80px rgba(200,240,58,0.08), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+.world-btn:hover::after {
+  transform: translate(-50%, -50%) scale(3.5);
+  opacity: 1;
+}
+.world-btn:active { transform: translateY(-4px) scale(0.99); }
+.world-glow {
+  position: absolute; inset: -2px;
+  border-radius: 30px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(200,240,58,0.4), inset 0 0 20px rgba(200,240,58,0.05);
+}
+.world-btn:hover .world-glow { opacity: 1; }
+.world-icon-wrap {
+  position: relative; z-index: 3;
+  width: 64px; height: 64px;
+  background: rgba(200,240,58,0.1);
+  border: 1px solid rgba(200,240,58,0.3);
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.world-btn:hover .world-icon-wrap {
+  background: rgba(200,240,58,0.22);
+  transform: scale(1.1) rotate(-4deg);
+}
+.world-icon-wrap svg {
+  width: 30px; height: 30px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(200,240,58,0.5));
+  transition: filter 0.3s;
+}
+.world-btn:hover .world-icon-wrap svg {
+  filter: drop-shadow(0 0 14px rgba(200,240,58,0.9));
+}
+.world-content { position: relative; z-index: 3; }
+.world-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+.world-title {
+  font-size: 30px; font-weight: 900;
+  letter-spacing: -1px; line-height: 1.1;
+  color: var(--text); margin-bottom: 12px;
+}
+.world-desc {
+  font-size: 14px; line-height: 1.65;
+  color: rgba(200,200,200,0.7);
+}
+.world-arrow {
+  position: absolute; bottom: 28px; right: 28px;
+  z-index: 3;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(200,240,58,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  font-size: 16px;
+  transition: background 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+}
+.world-btn:hover .world-arrow {
+  background: var(--accent); color: #000;
+  border-color: var(--accent); transform: rotate(45deg);
+}
+.world-btn.medicine {
+  background: linear-gradient(140deg, rgba(200,240,58,0.15) 0%, rgba(0,200,120,0.08) 50%, rgba(10,10,10,0.9) 100%);
+}
+.world-btn.trading {
+  background: linear-gradient(140deg, rgba(200,240,58,0.15) 0%, rgba(58,200,240,0.08) 50%, rgba(10,10,10,0.9) 100%);
+}
+.world-btn.esports {
+  background: linear-gradient(140deg, rgba(200,240,58,0.15) 0%, rgba(180,58,240,0.08) 50%, rgba(10,10,10,0.9) 100%);
+}
+.world-particles {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 1;
+  overflow: hidden; border-radius: 28px;
+}
+.world-particles span {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: floatParticle 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.world-btn:hover .world-particles span { animation-play-state: running; }
+.world-particles span:nth-child(1) { left:20%; top:80%; animation-delay:0s; }
+.world-particles span:nth-child(2) { left:50%; top:90%; animation-delay:0.6s; }
+.world-particles span:nth-child(3) { left:75%; top:75%; animation-delay:1.2s; }
+.world-particles span:nth-child(4) { left:35%; top:85%; animation-delay:1.8s; }
+.world-particles span:nth-child(5) { left:62%; top:88%; animation-delay:2.4s; }
+@keyframes floatParticle {
+  0%   { opacity:0; transform:translateY(0) scale(0); }
+  20%  { opacity:0.7; transform:translateY(-20px) scale(1); }
+  80%  { opacity:0.3; transform:translateY(-60px) scale(0.8); }
+  100% { opacity:0; transform:translateY(-90px) scale(0); }
+}
+@media (max-width: 900px) {
+  .worlds-section { padding: 80px 24px; }
+  .worlds-grid { grid-template-columns: 1fr; }
+  .world-btn { min-height: 260px; }
+}
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
