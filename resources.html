@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources — MANOMETH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --accent: #c8f03a;
+      --accent2: #a0d020;
+      --text: #f0f0f0;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 60px;
+      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.7);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s, background 0.3s;
+    }
+    .nav-logo {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-logo-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      animation: logoFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(200,240,58,0.4));
+    }
+    .nav-logo-icon circle {
+      stroke-dasharray: 240; stroke-dashoffset: 240;
+      animation: drawCircle 1.6s ease forwards 0.3s;
+    }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--accent); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 160px 60px 80px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,240,58,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,240,58,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-hero-orb {
+      position: absolute; top: 0; right: 5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,240,58,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      animation: orbPulse 7s ease-in-out infinite;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.3s;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arrow { font-size: 16px; transition: transform 0.3s; }
+    .back-link:hover .arrow { transform: translateX(-4px); }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+    .page-title {
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -3px;
+      opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.45s;
+    }
+    .page-title em {
+      font-style: italic; font-family: 'Playfair Display', serif;
+      color: var(--accent);
+    }
+    .page-sub {
+      font-size: 16px; line-height: 1.7; color: var(--muted);
+      max-width: 500px; margin-top: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    /* ── GLOSSY CARDS GRID ── */
+    .worlds-section {
+      padding: 100px 60px 120px;
+    }
+    .worlds-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* Glassmorphism card */
+    .world-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 52px 36px 80px;
+      cursor: pointer;
+      overflow: hidden;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s;
+
+      /* Glass base */
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.07) 0%,
+        rgba(255,255,255,0.02) 40%,
+        rgba(0,0,0,0.25) 100%
+      );
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.12) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 8px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(200,240,58,0.12);
+    }
+
+    /* Per-card tint */
+    .world-card.medicine {
+      background: linear-gradient(145deg,
+        rgba(200,240,58,0.12) 0%,
+        rgba(0,200,120,0.06) 35%,
+        rgba(0,0,0,0.35) 100%);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.1) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 8px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(0,200,120,0.2);
+    }
+    .world-card.trading {
+      background: linear-gradient(145deg,
+        rgba(200,240,58,0.12) 0%,
+        rgba(58,160,240,0.06) 35%,
+        rgba(0,0,0,0.35) 100%);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.1) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 8px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(58,160,240,0.2);
+    }
+    .world-card.esports {
+      background: linear-gradient(145deg,
+        rgba(200,240,58,0.12) 0%,
+        rgba(180,80,240,0.06) 35%,
+        rgba(0,0,0,0.35) 100%);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.1) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 8px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(180,80,240,0.2);
+    }
+
+    .world-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.16) inset,
+        0 -1px 0 rgba(0,0,0,0.3) inset,
+        0 30px 80px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(200,240,58,0.5),
+        0 0 60px rgba(200,240,58,0.08);
+    }
+
+    /* Top glass shine strip */
+    .world-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 8%; right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      border-radius: 0 0 50% 50%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Inner glow on hover */
+    .world-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 28px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(200,240,58,0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .world-card:hover::after { opacity: 1; }
+
+    /* Ripple blob */
+    .card-ripple {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,240,58,0.18), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), opacity 0.6s;
+      opacity: 0;
+      left: var(--rx, 50%);
+      top: var(--ry, 50%);
+    }
+    .world-card:hover .card-ripple {
+      transform: translate(-50%, -50%) scale(4);
+      opacity: 1;
+    }
+
+    /* Floating particles */
+    .card-particles {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 1; overflow: hidden; border-radius: 28px;
+    }
+    .card-particles span {
+      position: absolute;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--accent); opacity: 0;
+      animation: floatParticle 4s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+    .world-card:hover .card-particles span { animation-play-state: running; }
+    .card-particles span:nth-child(1) { left:15%; top:85%; animation-delay:0s; }
+    .card-particles span:nth-child(2) { left:45%; top:90%; animation-delay:0.5s; }
+    .card-particles span:nth-child(3) { left:70%; top:80%; animation-delay:1.1s; }
+    .card-particles span:nth-child(4) { left:30%; top:88%; animation-delay:1.7s; }
+    .card-particles span:nth-child(5) { left:60%; top:86%; animation-delay:2.3s; }
+    @keyframes floatParticle {
+      0%   { opacity:0; transform:translateY(0) scale(0); }
+      20%  { opacity:0.8; transform:translateY(-20px) scale(1); }
+      80%  { opacity:0.3; transform:translateY(-70px) scale(0.8); }
+      100% { opacity:0; transform:translateY(-100px) scale(0); }
+    }
+
+    .world-icon-wrap {
+      position: relative; z-index: 4;
+      width: 68px; height: 68px;
+      background: rgba(200,240,58,0.08);
+      border: 1px solid rgba(200,240,58,0.25);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset;
+    }
+    .world-card:hover .world-icon-wrap {
+      background: rgba(200,240,58,0.18);
+      transform: scale(1.12) rotate(-5deg);
+    }
+    .world-icon-wrap svg {
+      width: 32px; height: 32px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px rgba(200,240,58,0.5));
+      transition: filter 0.3s;
+    }
+    .world-card:hover .world-icon-wrap svg {
+      filter: drop-shadow(0 0 16px rgba(200,240,58,1));
+    }
+
+    .world-content { position: relative; z-index: 4; }
+    .world-domain {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .world-title {
+      font-size: 34px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.05;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .world-desc {
+      font-size: 14px; line-height: 1.7; color: rgba(210,210,210,0.7);
+    }
+
+    .world-arrow {
+      position: absolute; bottom: 32px; right: 32px; z-index: 4;
+      width: 42px; height: 42px;
+      border: 1px solid rgba(200,240,58,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 18px;
+      transition: background 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset;
+    }
+    .world-card:hover .world-arrow {
+      background: var(--accent); color: #000;
+      border-color: var(--accent); transform: rotate(45deg);
+      box-shadow: 0 0 20px rgba(200,240,58,0.4);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 60px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp  { to { opacity: 1; transform: translateY(0); } }
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.7; }
+    }
+
+    @media (max-width: 960px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 120px 24px 60px; }
+      .worlds-section { padding: 60px 24px 80px; }
+      .worlds-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <svg class="nav-logo-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="38" stroke="#c8f03a" stroke-width="4"/>
+        <path d="M60 25 C60 25,75 25,75 40 C75 55,45 55,45 70 C45 85,65 85,65 85"
+              stroke="#c8f03a" stroke-width="4" stroke-linecap="round"/>
+        <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70"
+              stroke="#c8f03a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M65 85 C65 85,65 95,60 100 C55 95,55 85,55 85 C55 80,60 75,60 75 C60 75,65 80,65 85Z"
+              fill="#c8f03a"/>
+      </svg>
+      MANOMETH<span>.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="resources.html" class="active">Resources</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-orb"></div>
+    <a class="back-link" href="index.html">
+      <span class="arrow">←</span> Back to portfolio
+    </a>
+    <p class="page-eyebrow">My worlds</p>
+    <h1 class="page-title">Resources<em>.</em></h1>
+    <p class="page-sub">Three domains that define how I think, analyze, and compete — beyond the code.</p>
+  </div>
+
+  <!-- Glossy World Cards -->
+  <section class="worlds-section">
+    <div class="worlds-grid">
+
+      <!-- Medicine -->
+      <div class="world-card medicine fade-in">
+        <div class="card-ripple"></div>
+        <div class="card-particles"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="world-icon-wrap">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 C12 2,16 2,16 6 C16 10,8 10,8 14 C8 18,13 18,13 18"/>
+            <circle cx="13" cy="20" r="2" fill="rgba(200,240,58,0.3)" stroke-width="1.5"/>
+            <path d="M8.5 14 L9.5 14 L10 12 L10.5 16 L11 14 L12 14" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="world-content">
+          <p class="world-domain">Domain 01</p>
+          <h2 class="world-title">Medicine</h2>
+          <p class="world-desc">Where it all started. Diagnosing, treating, and understanding the human body — the original complex system I learned to debug. M.B.B.S from Crimean Federal University, Russia. The clinical mindset behind every product decision.</p>
+        </div>
+        <div class="world-arrow">↗</div>
+      </div>
+
+      <!-- Trading -->
+      <div class="world-card trading fade-in">
+        <div class="card-ripple"></div>
+        <div class="card-particles"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="world-icon-wrap">
+          <svg viewBox="0 0 24 24">
+            <line x1="4" y1="12" x2="4" y2="6"/>
+            <rect x="2.5" y="8" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+            <line x1="9" y1="15" x2="9" y2="5"/>
+            <rect x="7.5" y="9" width="3" height="5" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+            <line x1="14" y1="13" x2="14" y2="7"/>
+            <rect x="12.5" y="8" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+            <line x1="19" y1="10" x2="19" y2="4"/>
+            <rect x="17.5" y="5" width="3" height="4" rx="0.5" fill="rgba(200,240,58,0.2)"/>
+            <line x1="2" y1="19" x2="22" y2="19" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="world-content">
+          <p class="world-domain">Domain 02</p>
+          <h2 class="world-title">Trading</h2>
+          <p class="world-desc">Charts, patterns, and calculated risk. I apply clinical precision to markets — Indian Stock Exchange and Crypto. Reading signals, managing exposure, staying disciplined when it counts most.</p>
+        </div>
+        <div class="world-arrow">↗</div>
+      </div>
+
+      <!-- Esports -->
+      <div class="world-card esports fade-in">
+        <div class="card-ripple"></div>
+        <div class="card-particles"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="world-icon-wrap">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="11" rx="5"/>
+            <line x1="8" y1="10" x2="8" y2="14"/>
+            <line x1="6" y1="12" x2="10" y2="12"/>
+            <circle cx="16" cy="10.5" r="1" fill="var(--accent)" stroke="none"/>
+            <circle cx="14" cy="13" r="1" fill="var(--accent)" stroke="none"/>
+            <circle cx="18" cy="13" r="1" fill="var(--accent)" stroke="none"/>
+          </svg>
+        </div>
+        <div class="world-content">
+          <p class="world-domain">Domain 03</p>
+          <h2 class="world-title">Esports</h2>
+          <p class="world-desc">A player, a spectator, a fan. PUBG Mobile at the competitive level. The strategy, teamwork, and mechanical skill in esports is a sport I take as seriously as cricket on the field.</p>
+        </div>
+        <div class="world-arrow">↗</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Manoj Ambati. All rights reserved.</p>
+    <p>Designed &amp; built with ❤️</p>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Stagger card delays
+    document.querySelectorAll('.world-card').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.12) + 's';
+    });
+
+    // Ripple follow mouse
+    document.querySelectorAll('.world-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--rx', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--ry', (e.clientY - rect.top) + 'px');
+      });
+      // Subtle 3D tilt
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+        card.style.transform = `translateY(-12px) scale(1.02) rotateX(${-y}deg) rotateY(${x}deg)`;
+        card.style.transition = 'transform 0.1s ease, box-shadow 0.5s';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s';
+      });
+    });
+
+    // Nav shrink
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.padding = '14px 60px';
+        nav.style.background = 'rgba(10,10,10,0.92)';
+      } else {
+        nav.style.padding = '24px 60px';
+        nav.style.background = 'rgba(10,10,10,0.7)';
+      }
+    });
+  </script>
+</body>
+</html>
