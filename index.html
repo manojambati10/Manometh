@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#0a0a0a;
+  --surface:#111;
+  --accent:#c8f03a;
+  --accent2:#a0d020;
+  --text:#f0f0f0;
+  --muted:#888;
+  --border:rgba(255,255,255,0.08);
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+html{scroll-behavior:smooth;}
+
+/* CURSOR */
+.cursor{
+  width:12px;height:12px;
+  background:var(--accent);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+}
+
+.cursor-follower{
+  width:40px;height:40px;
+  border:1px solid var(--accent);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:0.5;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 60px;
+  background:rgba(10,10,10,0.7);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  z-index:100;
+}
+
+/* LOGO */
+.nav-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  text-decoration:none;
+  color:var(--text);
+}
+
+.logo-icon{width:28px;height:28px;}
+
+.stroke{
+  fill:none;
+  stroke:var(--accent);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-dasharray:200;
+  stroke-dashoffset:200;
+  animation:draw 2s ease forwards;
+}
+
+.fill-heart{
+  fill:var(--accent);
+  opacity:0;
+  animation:fadeIn 1s ease forwards 1.5s;
+}
+
+@keyframes draw{to{stroke-dashoffset:0;}}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:140px 60px;
+}
+
+.hero-title{
+  font-size:80px;
+  font-weight:900;
+}
+
+.hero-sub{
+  color:var(--muted);
+  margin-top:20px;
+  max-width:500px;
+}
+
+/* LOGO WALL */
+.logo-wall{
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:30px 0;
+}
+
+.logo-track{
+  display:flex;
+  gap:60px;
+  width:max-content;
+  animation:scroll 14s linear infinite;
+}
+
+.logo-item svg{
+  width:80px;
+  height:80px;
+}
+
+@keyframes scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* SECTIONS */
+.section{
+  padding:120px 60px;
+  border-top:1px solid var(--border);
+}
+
+/* ABOUT */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+}
+
+/* WORK */
+.work-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.project-card{
+  background:var(--surface);
+  padding:20px;
+  border-radius:20px;
+  border:1px solid var(--border);
+}
+
+/* SKILLS */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.skill-item{
+  background:var(--surface);
+  padding:20px;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+/* CONTACT */
+.contact-inner{
+  background:var(--surface);
+  padding:80px;
+  text-align:center;
+  border-radius:20px;
+  border:1px solid var(--border);
+}
+
+/* FOOTER */
+footer{
+  padding:30px 60px;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:20px;}
+  .about-grid,.work-grid,.skills-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:48px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav>
+<a class="nav-logo" href="#">
+<svg class="logo-icon" viewBox="0 0 100 100">
+  <path class="stroke" d="M50 15 C50 15,65 15,65 30 C65 45,35 45,35 60 C35 75,55 75,55 75"/>
+  <path class="fill-heart" d="M55 75 C55 75,55 85,50 90 C45 85,45 75,45 75 Z"/>
+</svg>
+MANOMETH
+</a>
+
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#work">Work</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<h1 class="hero-title">Doctor, Developer & Designer</h1>
+<p class="hero-sub">Building modern digital + healthcare + design experiences.</p>
+</section>
+
+<!-- LOGO WALL -->
+<div class="logo-wall">
+<div class="logo-track">
+
+<div class="logo-item">
+<svg viewBox="0 0 120 120">
+<path class="stroke" d="M60 25 C60 25,75 25,75 40 C75 55,45 55,45 70 C45 85,65 85,65 85"/>
+<path class="fill-heart" d="M65 85 C65 85,65 95,60 100 C55 95,55 85,55 85 Z"/>
+</svg>
+</div>
+
+<div class="logo-item">
+<svg viewBox="0 0 120 120">
+<path class="stroke" d="M60 25 C60 25,75 25,75 40 C75 55,45 55,45 70 C45 85,65 85,65 85"/>
+<path class="fill-heart" d="M65 85 C65 85,65 95,60 100 C55 95,55 85,55 85 Z"/>
+</svg>
+</div>
+
+</div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+<div class="about-grid">
+<div>
+<h2>About</h2>
+<p>Doctor + Developer + Designer.</p>
+</div>
+<div></div>
+</div>
+</section>
+
+<!-- WORK -->
+<section class="section" id="work">
+<div class="work-grid">
+<div class="project-card">Project 1</div>
+<div class="project-card">Project 2</div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+<div class="skills-grid">
+<div class="skill-item">Frontend</div>
+<div class="skill-item">Backend</div>
+<div class="skill-item">Design</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+<div class="contact-inner">
+<h2>Let’s Work Together</h2>
+<p>email@domain.com</p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2026 MANOMETH
+</footer>
+
+<script>
+// cursor
+const cursor=document.getElementById("cursor");
+const follower=document.getElementById("cursorFollower");
+
+document.addEventListener("mousemove",(e)=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+follower.style.left=e.clientX+"px";
+follower.style.top=e.clientY+"px";
+});
+</script>
+
+</body>
+</html>
