@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio</title>
+  <title>MANOMETH — Doctor, Developer & Designer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +36,7 @@
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
       mix-blend-mode: difference;
     }
     .cursor-follower {
@@ -65,8 +65,28 @@
       font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
       color: var(--text);
       text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
     }
     .nav-logo span { color: var(--accent); }
+
+    /* Inline nav logo icon — small, clean */
+    .nav-logo-icon {
+      width: 28px; height: 28px;
+      flex-shrink: 0;
+      animation: logoFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(200,240,58,0.4));
+    }
+    .nav-logo-icon circle {
+      stroke-dasharray: 240;
+      stroke-dashoffset: 240;
+      animation: drawCircle 1.6s ease forwards 0.3s;
+    }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
       font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
@@ -102,7 +122,6 @@
       font-size: clamp(52px, 9vw, 120px);
       font-weight: 900; line-height: 0.95;
       letter-spacing: -3px;
-      overflow: hidden;
     }
     .hero-title .line {
       display: block; overflow: hidden;
@@ -119,7 +138,6 @@
       font-style: italic; font-family: 'Playfair Display', serif;
       color: var(--accent);
     }
-
     .hero-sub {
       max-width: 420px;
       font-size: 16px; line-height: 1.7; color: var(--muted);
@@ -150,7 +168,7 @@
     }
     .btn-ghost:hover { color: var(--text); }
 
-    /* scroll line */
+    /* Scroll indicator */
     .scroll-line {
       position: absolute; bottom: 40px; left: 60px;
       display: flex; align-items: center; gap: 12px;
@@ -165,6 +183,30 @@
       background: var(--muted);
     }
 
+    /* Animated scroll dot */
+    .scroll-dot {
+      position: absolute; bottom: 40px; right: 60px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.8s;
+    }
+    .scroll-dot-track {
+      width: 1px; height: 60px;
+      background: var(--border);
+      position: relative; overflow: hidden;
+    }
+    .scroll-dot-track::after {
+      content: '';
+      position: absolute; top: -100%; left: 0;
+      width: 1px; height: 40%;
+      background: var(--accent);
+      animation: scrollDot 2s ease-in-out infinite 2s;
+    }
+    @keyframes scrollDot {
+      0% { top: -40%; }
+      100% { top: 140%; }
+    }
+
     /* bg grid */
     .hero::before {
       content: '';
@@ -176,7 +218,43 @@
       pointer-events: none;
     }
 
-    /* ── ABOUT ── */
+    /* Glowing orb behind title */
+    .hero-orb {
+      position: absolute;
+      top: 30%; right: 10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(200,240,58,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.7; }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .marquee-track {
+      display: flex; gap: 48px; width: max-content;
+      animation: marquee 18s linear infinite;
+    }
+    .marquee-item {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      white-space: nowrap; display: flex; align-items: center; gap: 48px;
+    }
+    .marquee-item::after { content: '✦'; color: var(--accent); font-size: 10px; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
     .section {
       padding: 120px 60px;
       border-top: 1px solid var(--border);
@@ -191,6 +269,8 @@
       font-weight: 800; line-height: 1.05;
       letter-spacing: -2px; margin-bottom: 40px;
     }
+
+    /* ── ABOUT ── */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -209,7 +289,9 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px; padding: 32px;
+      transition: border-color 0.3s, transform 0.3s;
     }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .stat-number {
       font-size: 52px; font-weight: 900;
       color: var(--accent); letter-spacing: -2px;
@@ -232,16 +314,12 @@
       border-radius: 20px; overflow: hidden;
       position: relative;
       cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
-                  border-color 0.3s;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
     }
     .project-card:hover { transform: translateY(-6px); border-color: var(--accent); }
-    .project-card.featured {
-      grid-column: span 2;
-    }
+    .project-card.featured { grid-column: span 2; }
     .project-thumb {
       width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
       display: flex; align-items: center; justify-content: center;
       font-size: 80px;
       position: relative; overflow: hidden;
@@ -251,11 +329,20 @@
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
     }
-    .project-info { padding: 28px; }
-    .project-tags {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 12px;
+
+    /* Shimmer overlay on thumb hover */
+    .project-thumb::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(200,240,58,0.08) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      z-index: 1;
     }
+    .project-card:hover .project-thumb::before { transform: translateX(100%); }
+
+    .project-info { padding: 28px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
     .tag {
       font-size: 10px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -275,10 +362,11 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 16px; color: var(--muted);
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
     }
     .project-card:hover .project-arrow {
       background: var(--accent); color: #000; border-color: var(--accent);
+      transform: rotate(45deg);
     }
 
     /* ── SKILLS ── */
@@ -290,12 +378,18 @@
       border-radius: 14px; padding: 28px;
       background: var(--surface);
       transition: border-color 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .skill-item::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(200,240,58,0.06), transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
     }
     .skill-item:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-item:hover::before { opacity: 1; }
     .skill-icon { font-size: 32px; margin-bottom: 16px; }
-    .skill-name {
-      font-size: 16px; font-weight: 600; margin-bottom: 8px;
-    }
+    .skill-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
     .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
     .skill-bar-wrap {
       margin-top: 16px;
@@ -303,9 +397,9 @@
       border-radius: 10px; overflow: hidden;
     }
     .skill-bar {
-      height: 100%; background: var(--accent);
+      height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
       border-radius: 10px; width: 0;
-      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+      transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
     }
 
     /* ── CONTACT ── */
@@ -322,6 +416,7 @@
       width: 300px; height: 300px;
       background: radial-gradient(circle, rgba(200,240,58,0.12), transparent 70%);
       pointer-events: none;
+      animation: orbPulse 4s ease-in-out infinite;
     }
     .contact-title {
       font-size: clamp(40px, 6vw, 80px);
@@ -334,8 +429,16 @@
       font-weight: 700; letter-spacing: -0.5px;
       color: var(--accent); text-decoration: none;
       transition: opacity 0.3s;
+      position: relative; display: inline-block;
     }
-    .contact-email:hover { opacity: 0.7; }
+    .contact-email::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent);
+      transform: scaleX(0); transition: transform 0.4s ease;
+    }
+    .contact-email:hover::after { transform: scaleX(1); }
+    .contact-email:hover { opacity: 0.8; }
     .socials {
       display: flex; justify-content: center; gap: 16px;
       margin-top: 48px;
@@ -346,11 +449,12 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; text-decoration: none; color: var(--muted);
-      transition: border-color 0.3s, color 0.3s, transform 0.3s;
+      transition: border-color 0.3s, color 0.3s, transform 0.3s, background 0.3s;
     }
     .social-btn:hover {
       border-color: var(--accent); color: var(--accent);
       transform: translateY(-4px);
+      background: rgba(200,240,58,0.06);
     }
 
     /* ── FOOTER ── */
@@ -361,52 +465,36 @@
     }
     footer p { font-size: 13px; color: var(--muted); }
 
-    /* ── TEXT REVEAL ── */
-    .reveal-text {
-      overflow: hidden;
-    }
-    .reveal-text .inner {
-      display: block;
-      transform: translateY(100%);
-      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-text.visible .inner { transform: translateY(0); }
-
+    /* ── ANIMATIONS ── */
     .fade-in {
       opacity: 0; transform: translateY(30px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── KEYFRAMES ── */
-    @keyframes slideUp {
-      to { transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes slideUp { to { transform: translateY(0); } }
+    @keyframes fadeUp  { to { opacity: 1; transform: translateY(0); } }
 
-    /* ── MARQUEE ── */
-    .marquee-wrap {
-      overflow: hidden; border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0;
+    /* Staggered letter reveal on section titles */
+    .char-reveal {
+      overflow: hidden; display: inline-block;
     }
-    .marquee-track {
-      display: flex; gap: 48px; width: max-content;
-      animation: marquee 18s linear infinite;
+    .char-reveal .char {
+      display: inline-block;
+      transform: translateY(110%);
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
     }
-    .marquee-item {
-      font-size: 13px; font-weight: 600; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--muted);
-      white-space: nowrap; display: flex; align-items: center; gap: 48px;
-    }
-    .marquee-item::after {
-      content: '✦'; color: var(--accent); font-size: 10px;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .char-reveal.visible .char { transform: translateY(0); opacity: 1; }
+
+    /* Glitch flicker on hover for nav logo */
+    .nav-logo:hover > span { animation: glitch 0.4s steps(2) 1; }
+    @keyframes glitch {
+      0%   { text-shadow: 2px 0 var(--accent), -2px 0 #0ff; }
+      25%  { text-shadow: -2px 0 var(--accent), 2px 0 #f0f; }
+      50%  { text-shadow: 2px 2px var(--accent), -2px -2px #0ff; }
+      75%  { text-shadow: none; }
+      100% { text-shadow: none; }
     }
 
     /* ── RESPONSIVE ── */
@@ -421,105 +509,16 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .contact-inner { padding: 48px 24px; }
       footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+      .scroll-dot { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
-  /* MANOMETH Animated Logo */
-
-.logo-brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo-icon{
-  width:42px;
-  height:42px;
-  filter:drop-shadow(0 0 10px rgba(200,240,58,.5));
-  animation:logoFloat 3s ease-in-out infinite;
-}
-
-.logo-icon circle{
-  stroke-dasharray:240;
-  stroke-dashoffset:240;
-  animation:drawCircle 2s ease forwards;
-}
-
-.logo-icon path{
-  animation:pulseGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes drawCircle{
-  to{
-    stroke-dashoffset:0;
-  }
-}
-
-@keyframes pulseGlow{
-  from{
-    filter:drop-shadow(0 0 4px #c8f03a);
-  }
-  to{
-    filter:drop-shadow(0 0 16px #c8f03a);
-  }
-}
-
-@keyframes logoFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-4px);
-  }
-}
-
-/* Infinite Logo Wall */
-
-.logo-wall{
-  overflow:hidden;
-  width:100%;
-  padding:40px 0;
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-}
-
-.logo-track{
-  display:flex;
-  width:max-content;
-  gap:80px;
-  animation:scrollLogos 15s linear infinite;
-}
-
-.logo-item{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-width:120px;
-}
-
-.logo-item svg{
-  width:60px;
-  height:60px;
-  opacity:.8;
-  transition:.3s;
-}
-
-.logo-item:hover svg{
-  opacity:1;
-  transform:scale(1.15);
-}
-
-@keyframes scrollLogos{
-  from{
-    transform:translateX(0);
-  }
-  to{
-    transform:translateX(-50%);
-  }
-}
 </head>
 <body>
 
@@ -529,7 +528,19 @@
 
   <!-- Nav -->
   <nav>
-    <a class="nav-logo" href="#">MANOMETH<span>.</span></a>
+    <a class="nav-logo" href="#">
+      <!-- Small inline icon -->
+      <svg class="nav-logo-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="38" stroke="#c8f03a" stroke-width="4"/>
+        <path d="M60 25 C60 25,75 25,75 40 C75 55,45 55,45 70 C45 85,65 85,65 85"
+              stroke="#c8f03a" stroke-width="4" stroke-linecap="round"/>
+        <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70"
+              stroke="#c8f03a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M65 85 C65 85,65 95,60 100 C55 95,55 85,55 85 C55 80,60 75,60 75 C60 75,65 80,65 85Z"
+              fill="#c8f03a"/>
+      </svg>
+      MANOMETH<span>.</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
@@ -540,100 +551,46 @@
 
   <!-- Hero -->
   <section class="hero">
+    <div class="hero-orb"></div>
     <p class="hero-label">MANOJ AMBATI</p>
-    <p class="hero-sub">
-      as
-    </p>
     <h1 class="hero-title">
       <span class="line"><span class="word">Doctor,</span></span>
       <span class="line"><span class="word"><em>Developer</em></span></span>
       <span class="line"><span class="word">&amp; Designer.</span></span>
-      
     </h1>
-    
     <p class="hero-sub">
-      Doctor IRL, geek for modern tech. I design, code, shoot photos, analyze trades, and play/watch sports + esports. If your project mixes healthcare with anything digital
+      Doctor IRL, geek for modern tech. I design, code, shoot photos, analyze trades, and play/watch sports + esports. If your project mixes healthcare with anything digital — I'm your person.
     </p>
     <div class="hero-cta">
       <a class="btn-primary" href="#work">View my work 📎</a>
       <a class="btn-ghost" href="#contact">Let's talk 💬</a>
     </div>
-    <div class=</div>
+    <div class="scroll-line">Scroll to explore</div>
+    <div class="scroll-dot">
+      <div class="scroll-dot-track"></div>
+    </div>
   </section>
 
-<!-- Logo Wall -->
-<div class="logo-wall">
-  <div class="logo-track">
-
-    <!-- Set 1 -->
-<div class="logo-item"><svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Stethoscope tube with ECG line -->
-  <path d="M60 25 C60 25, 75 25, 75 40 C75 55, 45 55, 45 70 C45 85, 65 85, 65 85" 
-        stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
-  
-  <!-- ECG blips in the tube -->
-  <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70" 
-        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  
-  <!-- Heart as chest piece -->
-  <path d="M65 85 C65 85, 65 95, 60 100 C55 95, 55 85, 55 85 C55 80, 60 75, 60 75 C60 75, 65 80, 65 85 Z" 
-        fill="white"/>
-  
-  <!-- Ear pieces -->
-  <path d="M60 25 C60 20, 55 15, 50 15" stroke="white" stroke-width="4" stroke-linecap="round"/>
-  <path d="M60 25 C60 20, 65 15, 70 15" stroke="white" stroke-width="4" stroke-linecap="round"/>
-</svg></div>
-
-    <!-- Duplicate Set (IMPORTANT for infinite loop) -->
-<div class="logo-item"><svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Stethoscope tube with ECG line -->
-  <path d="M60 25 C60 25, 75 25, 75 40 C75 55, 45 55, 45 70 C45 85, 65 85, 65 85" 
-        stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
-  
-  <!-- ECG blips in the tube -->
-  <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70" 
-        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  
-  <!-- Heart as chest piece -->
-  <path d="M65 85 C65 85, 65 95, 60 100 C55 95, 55 85, 55 85 C55 80, 60 75, 60 75 C60 75, 65 80, 65 85 Z" 
-        fill="white"/>
-  
-  <!-- Ear pieces -->
-  <path d="M60 25 C60 20, 55 15, 50 15" stroke="white" stroke-width="4" stroke-linecap="round"/>
-  <path d="M60 25 C60 20, 65 15, 70 15" stroke="white" stroke-width="4" stroke-linecap="round"/>
-</svg></div>
-
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Healthcare Tech</span>
+      <span class="marquee-item">Full-Stack Dev</span>
+      <span class="marquee-item">UI/UX Design</span>
+      <span class="marquee-item">AI Integration</span>
+      <span class="marquee-item">Photography</span>
+      <span class="marquee-item">Trading Analysis</span>
+      <span class="marquee-item">Esports</span>
+      <span class="marquee-item">Healthcare Tech</span>
+      <span class="marquee-item">Full-Stack Dev</span>
+      <span class="marquee-item">UI/UX Design</span>
+      <span class="marquee-item">AI Integration</span>
+      <span class="marquee-item">Photography</span>
+      <span class="marquee-item">Trading Analysis</span>
+      <span class="marquee-item">Esports</span>
+    </div>
   </div>
-</div>
 
-<a class="nav-logo" href="#">MANOMETH<span>.</span></a>
-<a class="nav-logo logo-brand" href="#">
-  <svg class="logo-icon" viewBox="0 0 120 120" fill="none">
-    <circle cx="60" cy="60" r="38" stroke="#c8f03a" stroke-width="4"/>
-
-    <path d="M60 25
-             C60 25,75 25,75 40
-             C75 55,45 55,45 70
-             C45 85,65 85,65 85"
-          stroke="#c8f03a"
-          stroke-width="4"
-          stroke-linecap="round"/>
-
-    <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70"
-          stroke="#c8f03a"
-          stroke-width="3"
-          stroke-linecap="round"/>
-
-    <path d="M65 85
-             C65 85,65 95,60 100
-             C55 95,55 85,55 85
-             C55 80,60 75,60 75
-             C60 75,65 80,65 85Z"
-          fill="#c8f03a"/>
-  </svg>
-
-  <span>MANOMETH</span>
-</a>
   <!-- About -->
   <section class="section" id="about">
     <div class="about-grid">
@@ -641,10 +598,10 @@
         <p class="section-eyebrow fade-in">About me</p>
         <h2 class="section-title fade-in">I turn ideas into <em style="font-style:italic;font-family:'Playfair Display',serif;color:var(--accent)">experiences.</em></h2>
         <p class="fade-in">
-          I'm a <strong>full-stack developer &amp; UI designer</strong> passionate about crafting interfaces that feel alive. With a background in both engineering and design, I bridge the gap between beautiful and functional.
+          I'm a <strong>doctor, full-stack developer &amp; UI designer</strong> passionate about crafting interfaces that feel alive. I bridge the gap between healthcare knowledge and modern digital experiences.
         </p>
         <p class="fade-in">
-          When I'm not coding, you'll find me on the <strong>cricket field</strong> or sharing chai on a staircase with friends.
+          When I'm not at a desk, you'll find me on the <strong>cricket field</strong>, behind a camera lens, or deep in a trading chart.
         </p>
       </div>
       <div class="about-stats">
@@ -715,7 +672,7 @@
       <div class="skill-item fade-in">
         <div class="skill-icon">⚛️</div>
         <div class="skill-name">Frontend Dev</div>
-        <div class="skill-desc">React, Next.js, TypeScript, Tailwind — I build fast, accessible UIs.</div>
+        <div class="skill-desc">React, Next.js, TypeScript, Tailwind — fast, accessible UIs.</div>
         <div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div>
       </div>
       <div class="skill-item fade-in">
@@ -745,7 +702,7 @@
       <div class="skill-item fade-in">
         <div class="skill-icon">☁️</div>
         <div class="skill-name">DevOps</div>
-        <div class="skill-desc">Docker, AWS, CI/CD — reliable infra so things don't break at 2am.</div>
+        <div class="skill-desc">Docker, AWS, CI/CD — reliable infra that doesn't break at 2am.</div>
         <div class="skill-bar-wrap"><div class="skill-bar" data-width="68"></div></div>
       </div>
     </div>
@@ -756,7 +713,7 @@
     <div class="contact-inner fade-in">
       <h2 class="contact-title">Let's build<br/><em style="font-family:'Playfair Display',serif;color:var(--accent);font-style:italic;">something</em><br/>together.</h2>
       <p class="contact-sub">Have a project in mind? I'd love to hear about it.</p>
-      <a class="contact-email" href="mailto:hello@yourname.com">hello@yourname.com</a>
+      <a class="contact-email" href="mailto:hello@manometh.com">hello@manometh.com</a>
       <div class="socials">
         <a class="social-btn" href="#" title="GitHub">⌥</a>
         <a class="social-btn" href="#" title="LinkedIn">in</a>
@@ -768,33 +725,46 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2026 Your Name. All rights reserved.</p>
+    <p>© 2026 Manoj Ambati. All rights reserved.</p>
     <p>Designed &amp; built with ❤️</p>
   </footer>
 
   <script>
-  // Fix scroll jump on refresh
-  history.scrollRestoration = "manual";
-
-  window.addEventListener("load", () => {
-    window.scrollTo(0, 0);
-
-    if (window.location.hash) {
-      history.replaceState(null, null, window.location.pathname);
-    }
-  });
+    // Prevent scroll jump on refresh
+    history.scrollRestoration = "manual";
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+      }
+    });
 
     // ── Custom cursor
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('cursorFollower');
-    let fx = 0, fy = 0;
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
-      fx += (e.clientX - fx) * 0.12;
-      fy += (e.clientY - fy) * 0.12;
       follower.style.left = e.clientX + 'px';
       follower.style.top = e.clientY + 'px';
+    });
+
+    // Cursor scale on hoverable elements
+    document.querySelectorAll('a, button, .project-card, .skill-item, .stat-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        follower.style.width = '60px';
+        follower.style.height = '60px';
+        follower.style.opacity = '0.25';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        follower.style.width = '40px';
+        follower.style.height = '40px';
+        follower.style.opacity = '0.5';
+      });
     });
 
     // ── Scroll animations
@@ -802,41 +772,39 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-
-          // Animate skill bars
           const bar = entry.target.querySelector('.skill-bar');
           if (bar) {
-            setTimeout(() => {
-              bar.style.width = bar.dataset.width + '%';
-            }, 200);
+            setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
           }
         }
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.fade-in, .reveal-text').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── Stagger skill items
+    // ── Stagger delays
     document.querySelectorAll('.skill-item').forEach((el, i) => {
       el.style.transitionDelay = (i * 0.08) + 's';
     });
-
-    // ── Stagger stat cards
     document.querySelectorAll('.stat-card').forEach((el, i) => {
       el.style.transitionDelay = (i * 0.1) + 's';
     });
+    document.querySelectorAll('.project-card').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+    });
 
-    // ── Number count-up animation
+    // ── Count-up animation
     function animateCount(el, target) {
-      let count = 0;
       const isSymbol = isNaN(parseInt(target));
       if (isSymbol) return;
       const num = parseInt(target);
+      const hasSuffix = target.includes('+');
       const duration = 1500;
       const step = duration / num;
+      let count = 0;
       const timer = setInterval(() => {
         count++;
-        el.textContent = count + (target.includes('+') ? '+' : '');
+        el.textContent = count + (hasSuffix ? '+' : '');
         if (count >= num) { el.textContent = target; clearInterval(timer); }
       }, step);
     }
@@ -855,12 +823,12 @@
 
     document.querySelectorAll('.stat-card').forEach(el => statObserver.observe(el));
 
-    // ── Smooth hover on project cards
+    // ── 3D tilt on project cards
     document.querySelectorAll('.project-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
         card.style.transform = `translateY(-6px) rotateX(${-y}deg) rotateY(${x}deg)`;
         card.style.transition = 'transform 0.1s ease';
       });
@@ -868,6 +836,27 @@
         card.style.transform = '';
         card.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
       });
+    });
+
+    // ── Parallax hero orb on mouse move
+    const orb = document.querySelector('.hero-orb');
+    document.addEventListener('mousemove', e => {
+      if (!orb) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      orb.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // ── Nav shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.padding = '14px 60px';
+        nav.style.background = 'rgba(10,10,10,0.92)';
+      } else {
+        nav.style.padding = '24px 60px';
+        nav.style.background = 'rgba(10,10,10,0.7)';
+      }
     });
   </script>
 </body>
