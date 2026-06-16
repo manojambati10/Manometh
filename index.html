@@ -436,7 +436,7 @@
 
   <!-- Nav -->
   <nav>
-    <a class="nav-logo" href="#">YN<span>.</span></a>
+    <a class="nav-logo" href="#">MANOMETH<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
@@ -447,40 +447,93 @@
 
   <!-- Hero -->
   <section class="hero">
-    <p class="hero-label">Available for work — 2026</p>
+    <p class="hero-label">ACCURSED BUT UNBROKEN</p>
     <h1 class="hero-title">
-      <span class="line"><span class="word">Creative</span></span>
+      <span class="line"><span class="word">Doctor,</span></span>
       <span class="line"><span class="word"><em>Developer</em></span></span>
       <span class="line"><span class="word">&amp; Designer.</span></span>
     </h1>
     <p class="hero-sub">
-      I build fast, beautiful digital experiences that blend clean code with thoughtful design. Currently open to freelance &amp; full-time roles.
+      I’m a medical doctor passionate about technology, building digital experiences, and exploring trading systems. Open to freelance & full-time roles.
     </p>
     <div class="hero-cta">
       <a class="btn-primary" href="#work">View my work →</a>
       <a class="btn-ghost" href="#contact">Let's talk ↗</a>
     </div>
-    <div class="scroll-line">Scroll to explore</div>
+    <div class=</div>
   </section>
 
-  <!-- Marquee -->
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="marquee">
-      <div class="marquee-item">UI/UX Design</div>
-      <div class="marquee-item">React &amp; Next.js</div>
-      <div class="marquee-item">Motion Design</div>
-      <div class="marquee-item">Full-Stack Dev</div>
-      <div class="marquee-item">Mobile Apps</div>
-      <div class="marquee-item">Brand Identity</div>
-      <div class="marquee-item">UI/UX Design</div>
-      <div class="marquee-item">React &amp; Next.js</div>
-      <div class="marquee-item">Motion Design</div>
-      <div class="marquee-item">Full-Stack Dev</div>
-      <div class="marquee-item">Mobile Apps</div>
-      <div class="marquee-item">Brand Identity</div>
-    </div>
-  </div>
+<!-- Logo Wall -->
+<div class="logo-wall">
+  <div class="logo-track">
 
+    <!-- Set 1 -->
+    <div class="logo-item"><img src="images/react.png" alt="React"></div>
+    <div class="logo-item"><img src="images/nextjs.png" alt="Next.js"></div>
+    <div class="logo-item"><img src="images/node.png" alt="Node.js"></div>
+    <div class="logo-item"><img src="images/python.png" alt="Python"></div>
+    <div class="logo-item"><img src="images/figma.png" alt="Figma"></div>
+    <div class="logo-item"><img src="images/github.png" alt="GitHub"></div>
+
+    <!-- Duplicate Set (IMPORTANT for infinite loop) -->
+    <div class="logo-item"><img src="images/react.png" alt="React"></div>
+    <div class="logo-item"><img src="images/nextjs.png" alt="Next.js"></div>
+    <div class="logo-item"><img src="images/node.png" alt="Node.js"></div>
+    <div class="logo-item"><img src="images/python.png" alt="Python"></div>
+    <div class="logo-item"><img src="images/figma.png" alt="Figma"></div>
+    <div class="logo-item"><img src="images/github.png" alt="GitHub"></div>
+
+  </div>
+</div>
+
+/* ===== LOGO WALL ===== */
+.logo-wall {
+  overflow: hidden;
+  padding: 30px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLogos 18s linear infinite;
+  align-items: center;
+}
+
+.logo-item {
+  flex: 0 0 auto;
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+}
+
+.logo-item img {
+  height: 28px;
+  width: auto;
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.logo-item img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.15);
+}
+
+/* Infinite smooth scroll */
+@keyframes scrollLogos {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
   <!-- About -->
   <section class="section" id="about">
     <div class="about-grid">
