@@ -346,38 +346,6 @@
       transform: rotate(45deg);
     }
 
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
-    }
-    .skill-item {
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px;
-      background: var(--surface);
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .skill-item::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(200,240,58,0.06), transparent 60%);
-      opacity: 0; transition: opacity 0.4s;
-    }
-    .skill-item:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .skill-item:hover::before { opacity: 1; }
-    .skill-icon { font-size: 32px; margin-bottom: 16px; }
-    .skill-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .skill-bar-wrap {
-      margin-top: 16px;
-      height: 3px; background: rgba(255,255,255,0.07);
-      border-radius: 10px; overflow: hidden;
-    }
-    .skill-bar {
-      height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
-      border-radius: 10px; width: 0;
-      transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
-    }
 
     /* ── CONTACT ── */
     .contact-inner {
@@ -651,7 +619,7 @@
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .work-grid { grid-template-columns: 1fr; }
       .project-card.featured { grid-column: span 1; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .Information-grid { grid-template-columns: 1fr 1fr; }
       .contact-inner { padding: 48px 24px; }
       footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
       .scroll-dot { display: none; }
@@ -689,7 +657,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="#skills">Skills</a></li>
+      <li><a href="#Information">Information</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -809,50 +777,8 @@
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="section" id="skills">
-    <p class="section-eyebrow fade-in">What I do</p>
-    <h2 class="section-title fade-in">Skills &amp; tools.</h2>
-    <div class="skills-grid">
-      <div class="skill-item fade-in">
-        <div class="skill-icon">⚛️</div>
-        <div class="skill-name">Frontend Dev</div>
-        <div class="skill-desc">React, Next.js, TypeScript, Tailwind — fast, accessible UIs.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div>
-      </div>
-      <div class="skill-item fade-in">
-        <div class="skill-icon">🎨</div>
-        <div class="skill-name">UI/UX Design</div>
-        <div class="skill-desc">Figma, Framer, motion design — visual systems that feel inevitable.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
-      </div>
-      <div class="skill-item fade-in">
-        <div class="skill-icon">🔧</div>
-        <div class="skill-name">Backend Dev</div>
-        <div class="skill-desc">Node.js, Python, PostgreSQL — clean APIs and solid architecture.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="78"></div></div>
-      </div>
-      <div class="skill-item fade-in">
-        <div class="skill-icon">📱</div>
-        <div class="skill-name">Mobile</div>
-        <div class="skill-desc">React Native &amp; Flutter — cross-platform apps that feel native.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="70"></div></div>
-      </div>
-      <div class="skill-item fade-in">
-        <div class="skill-icon">🤖</div>
-        <div class="skill-name">AI Integration</div>
-        <div class="skill-desc">LLM APIs, RAG pipelines, embedding models — AI that ships.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div>
-      </div>
-      <div class="skill-item fade-in">
-        <div class="skill-icon">☁️</div>
-        <div class="skill-name">DevOps</div>
-        <div class="skill-desc">Docker, AWS, CI/CD — reliable infra that doesn't break at 2am.</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" data-width="68"></div></div>
-      </div>
-    </div>
-  </section>
-<!-- Worlds -->
+
+<!-- Information -->
 <section class="worlds-section" id="worlds">
   <p class="section-eyebrow fade-in">My worlds</p>
   <h2 class="section-title fade-in">Beyond the <em style="font-style:italic;font-family:'Playfair Display',serif;color:var(--accent)">screen.</em></h2>
