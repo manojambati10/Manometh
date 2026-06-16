@@ -427,6 +427,99 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  /* MANOMETH Animated Logo */
+
+.logo-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-icon{
+  width:42px;
+  height:42px;
+  filter:drop-shadow(0 0 10px rgba(200,240,58,.5));
+  animation:logoFloat 3s ease-in-out infinite;
+}
+
+.logo-icon circle{
+  stroke-dasharray:240;
+  stroke-dashoffset:240;
+  animation:drawCircle 2s ease forwards;
+}
+
+.logo-icon path{
+  animation:pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes drawCircle{
+  to{
+    stroke-dashoffset:0;
+  }
+}
+
+@keyframes pulseGlow{
+  from{
+    filter:drop-shadow(0 0 4px #c8f03a);
+  }
+  to{
+    filter:drop-shadow(0 0 16px #c8f03a);
+  }
+}
+
+@keyframes logoFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-4px);
+  }
+}
+
+/* Infinite Logo Wall */
+
+.logo-wall{
+  overflow:hidden;
+  width:100%;
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.logo-track{
+  display:flex;
+  width:max-content;
+  gap:80px;
+  animation:scrollLogos 15s linear infinite;
+}
+
+.logo-item{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:120px;
+}
+
+.logo-item svg{
+  width:60px;
+  height:60px;
+  opacity:.8;
+  transition:.3s;
+}
+
+.logo-item:hover svg{
+  opacity:1;
+  transform:scale(1.15);
+}
+
+@keyframes scrollLogos{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
 </head>
 <body>
 
@@ -513,15 +606,34 @@
   </div>
 </div>
 
-.logo svg {
-  width: 40px;   /* Change size here */
-  height: 40px;
-}
+<a class="nav-logo" href="#">MANOMETH<span>.</span></a>
+<a class="nav-logo logo-brand" href="#">
+  <svg class="logo-icon" viewBox="0 0 120 120" fill="none">
+    <circle cx="60" cy="60" r="38" stroke="#c8f03a" stroke-width="4"/>
 
-.logo svg path {
-  stroke: white; /* Already white, but you can change */
-  fill: white;
-}
+    <path d="M60 25
+             C60 25,75 25,75 40
+             C75 55,45 55,45 70
+             C45 85,65 85,65 85"
+          stroke="#c8f03a"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <path d="M48 70 L52 70 L54 62 L56 78 L58 70 L62 70"
+          stroke="#c8f03a"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <path d="M65 85
+             C65 85,65 95,60 100
+             C55 95,55 85,55 85
+             C55 80,60 75,60 75
+             C60 75,65 80,65 85Z"
+          fill="#c8f03a"/>
+  </svg>
+
+  <span>MANOMETH</span>
+</a>
   <!-- About -->
   <section class="section" id="about">
     <div class="about-grid">
@@ -661,6 +773,17 @@
   </footer>
 
   <script>
+  // Fix scroll jump on refresh
+  history.scrollRestoration = "manual";
+
+  window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname);
+    }
+  });
+
     // ── Custom cursor
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('cursorFollower');
